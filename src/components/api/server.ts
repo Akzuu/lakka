@@ -6,7 +6,6 @@ import fastifyHelmet from 'fastify-helmet';
 import fastifyCors from 'fastify-cors';
 import fastifyAutoLoad from 'fastify-autoload';
 import { log } from '../../lib/log';
-import 'dotenv/config' 
 
 const APPLICATION_PORT = process.env.APPLICATION_PORT?? 3000;
 const ROUTE_PREFIX = process.env.ROUTE_PREFIX;

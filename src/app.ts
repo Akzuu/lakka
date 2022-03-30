@@ -1,5 +1,6 @@
 import initServer from "./components/api/server";
 import { log } from "./lib/log";
+import 'dotenv/config';
 
 
 module.exports = (async () => {
