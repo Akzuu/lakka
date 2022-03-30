@@ -13,10 +13,5 @@
           "severity": "warning",
           "options": ["debug", "info", "log", "time", "timeEnd", "trace"]
       }
-  },
-  "jsRules": {
-      "max-line-length": {
-          "options": [120]
-      }
   }
 }

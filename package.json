@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@types/node": "^17.0.23",
+    "dotenv": "^16.0.0",
     "fastify": "^3.27.4",
     "fastify-autoload": "^3.11.0",
     "fastify-cors": "^6.0.3",
