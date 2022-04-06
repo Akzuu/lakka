@@ -63,6 +63,8 @@ const initServer = async () => {
       },
       exposeRoute: true,
     })
+    // SEC_PRO: Helmet is a security middleware, which can help filtering out
+    // unwanted requests. It will for example filter out common vulnerabilities
     .register(fastifyHelmet, {
       contentSecurityPolicy: {
         directives: {
@@ -72,7 +74,9 @@ const initServer = async () => {
           scriptSrc: ['\'self\'', 'https: \'unsafe-inline\''],
         },
       },
+      global: true,
     })
+    // SEC_PRO: CORS is also used to manage where the server can be accessed
     .register(fastifyCors, {
       origin: (origin, cb) => {
         cb(null, true);
@@ -92,6 +96,8 @@ const initServer = async () => {
         stack: error.stack,
       });
 
+      // SEC_PRO: As a security measure, we do not return the actual error msg
+      // to the user. Instead, we just send a general 500 code and message
       reply.status(500).send({
         statusCode: 500,
         error: 'Internal Server Error',
