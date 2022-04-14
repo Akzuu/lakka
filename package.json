@@ -36,6 +36,8 @@
     "fastify-cors": "^6.0.3",
     "fastify-helmet": "^7.0.1",
     "fastify-swagger": "^5.1.0",
+    "knex": "^1.0.7",
+    "mysql": "^2.18.1",
     "node-telegram-bot-api": "^0.56.0",
     "winston": "^3.6.0"
   },
