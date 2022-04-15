@@ -1,6 +1,6 @@
 export enum Env {
-  development = "development",
-  production = "production",
+  development = 'development',
+  production = 'production',
 }
 
 declare global {

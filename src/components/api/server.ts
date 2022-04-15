@@ -7,7 +7,7 @@ import fastifyCors from 'fastify-cors';
 import fastifyAutoLoad from 'fastify-autoload';
 import { log } from '../../lib/log';
 
-const APPLICATION_PORT = process.env.APPLICATION_PORT?? 3000;
+const APPLICATION_PORT = process.env.APPLICATION_PORT ?? 3000;
 const ROUTE_PREFIX = process.env.ROUTE_PREFIX;
 const SWAGGER_HOST = process.env.SWAGGER_HOST;
 
@@ -50,15 +50,18 @@ const initServer = async () => {
             in: 'header',
           },
         },
-        security: [{
-          bearerAuth: [],
-        }],
+        security: [
+          {
+            bearerAuth: [],
+          },
+        ],
         consumes: ['application/json'],
         produces: ['application/json'],
-        tags: [{
-          name: 'Utility',
-          description: 'Utility endpoints',
-        },
+        tags: [
+          {
+            name: 'Utility',
+            description: 'Utility endpoints',
+          },
         ],
       },
       exposeRoute: true,
@@ -68,10 +71,10 @@ const initServer = async () => {
     .register(fastifyHelmet, {
       contentSecurityPolicy: {
         directives: {
-          defaultSrc: ['\'self\''],
-          styleSrc: ['\'self\'', '\'unsafe-inline\''],
-          imgSrc: ['\'self\'', 'data:', 'validator.swagger.io'],
-          scriptSrc: ['\'self\'', 'https: \'unsafe-inline\''],
+          defaultSrc: ["'self'"],
+          styleSrc: ["'self'", "'unsafe-inline'"],
+          imgSrc: ["'self'", 'data:', 'validator.swagger.io'],
+          scriptSrc: ["'self'", "https: 'unsafe-inline'"],
         },
       },
       global: true,
@@ -84,7 +87,8 @@ const initServer = async () => {
     })
     .register(fastifyAutoLoad, {
       dir: path.join(__dirname, 'routes'),
-      dirNameRoutePrefix: (folderParent, folderName) => `${ROUTE_PREFIX}/${folderName}`,
+      dirNameRoutePrefix: (folderParent, folderName) =>
+        `${ROUTE_PREFIX}/${folderName}`,
     })
     .setErrorHandler((error, request, reply) => {
       log.error({

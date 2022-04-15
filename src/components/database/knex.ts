@@ -1,6 +1,6 @@
-import config from "../../../knexfile";
-import knex from "knex";
-import { Env } from "../../../environment";
+import config from '../../../knexfile';
+import knex from 'knex';
+import { Env } from '../../../environment';
 
 const ENV = (process.env.ENVIRONMENT as Env) ?? Env.development;
 
