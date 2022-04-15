@@ -1,0 +1,21 @@
+{
+	"folders": [
+		{
+			"name": "ROOT",
+			"path": "."
+		},
+		{
+			"path": "src/components/api"
+		},
+		{
+			"path": "src/components/bot"
+		},
+		{
+			"path": "src/components/database"
+		},
+		{
+			"path": "src/lib"
+		}
+	],
+	"settings": {}
+}
