@@ -8,7 +8,7 @@ module.exports = (async () => {
   // Run database migrations
   log.info('Starting lakka...');
   try {
-    await knex.migrate.up();
+    await knex.migrate.latest();
   } catch (error) {
     log.error('Error running migrations!', error);
     process.exit(1);
