@@ -1,13 +1,8 @@
-export enum Env {
-  development = 'development',
-  production = 'production',
-}
-
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
       TG_TOKEN: string;
-      NODE_ENV: Env;
+      NODE_ENV: string;
       MYSQL_HOST: string;
       MYSQL_DATABASE: string;
       MYSQL_USER: string;
@@ -17,3 +12,5 @@ declare global {
     }
   }
 }
+
+export {};

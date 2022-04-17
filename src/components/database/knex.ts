@@ -1,6 +1,10 @@
 import config from '../../../knexfile';
 import knex from 'knex';
-import { Env } from '../../../environment';
+
+export enum Env {
+  development = 'development',
+  production = 'production',
+}
 
 const ENV = (process.env.ENVIRONMENT as Env) ?? Env.development;
 
