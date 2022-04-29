@@ -3,8 +3,6 @@ process.env.NTBA_FIX_319 = '1';
 
 import TelegramBot from 'node-telegram-bot-api';
 import { createStream } from '../../lib/commands/create';
-import { log } from '../../lib/log';
-import { createStreamQuery } from '../database/queries/stream/streamQueries';
 
 const TG_TOKEN = process.env.TG_TOKEN;
 if (!TG_TOKEN) throw new Error('Missing env variable TG_TOKEN!');
@@ -23,6 +21,10 @@ export const AVAILABLE_COMMANDS = [
 ];
 
 export const AVAILABLE_COMMANDS_WHILE_STREAMING = [
+  [
+    'createPasscode',
+    'Generates a passcode which can be used to join the stream',
+  ],
   ['edit', 'Edit stream information'],
   ['leave', 'Leave stream'],
 
@@ -32,6 +34,7 @@ export const AVAILABLE_COMMANDS_WHILE_STREAMING = [
 
 export const bot = new TelegramBot(TG_TOKEN, { polling: true });
 
+// TODO: Handle inputs without command
 export const messageHandler = async (
   msg: TelegramBot.Message,
   match: RegExpExecArray | null
