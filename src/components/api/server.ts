@@ -37,8 +37,8 @@ const initServer = async () => {
       routePrefix: `${ROUTE_PREFIX}/documentation`,
       swagger: {
         info: {
-          title: 'Project AKLL 2020 Web Backend - Match Service',
-          description: 'Project AKLL 2020 Web Backend - Match Service',
+          title: 'Lakka',
+          description: 'Kyykka stream UI generator',
           version: '1.0.0',
         },
         host: `${SWAGGER_HOST}:${APPLICATION_PORT}`,
