@@ -19,7 +19,6 @@ export const createStream = async (chatId: ChatId, sender?: string) => {
   try {
     streamId = await createStreamQuery({
       leagueId: 1, // TODO Create leagues
-      passcode,
     });
   } catch (error) {
     log.error('Stream creation failed!', error);

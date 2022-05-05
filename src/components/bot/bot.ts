@@ -3,6 +3,7 @@ process.env.NTBA_FIX_319 = '1';
 
 import TelegramBot from 'node-telegram-bot-api';
 import { createStream } from '../../lib/commands/create';
+import { log } from '../../lib/log';
 
 const TG_TOKEN = process.env.TG_TOKEN;
 if (!TG_TOKEN) throw new Error('Missing env variable TG_TOKEN!');
@@ -44,6 +45,8 @@ export const messageHandler = async (
   const sender = msg.chat.first_name
     ? `${msg.chat.first_name} ${msg.chat.last_name}`.trim()
     : msg.chat.username;
+
+  log.info(`Received a new command "${command}" from ${sender}`);
   switch (command) {
     default:
       sendMessage(
@@ -55,10 +58,10 @@ export const messageHandler = async (
       sendMessage(
         chatId,
         `Available commands:\n${AVAILABLE_COMMANDS.map(
-          (e) => `/${e[0]} ${e[1]}`
+          (c) => `/${c[0]} ${c[1]}`
         ).join('\n')}
         \nAvailable commands while streaming:\n${AVAILABLE_COMMANDS_WHILE_STREAMING.map(
-          (e) => `/${e[0]} ${e[1]}`
+          (c) => `/${c[0]} ${c[1]}`
         ).join('\n')}
         `
       );

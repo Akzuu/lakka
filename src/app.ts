@@ -7,6 +7,7 @@ import knex from './components/database/knex';
 module.exports = (async () => {
   // Run database migrations
   log.info('Starting lakka...');
+  log.info('Running migrations');
   try {
     await knex.migrate.latest();
   } catch (error) {
@@ -15,6 +16,7 @@ module.exports = (async () => {
   }
 
   // Start HTTP server
+  log.info('Starting HTTP server');
   try {
     const server = await initServer();
     await server.start();
@@ -24,6 +26,7 @@ module.exports = (async () => {
   }
 
   // Start Telegram command listener
+  log.info('Starting Telegram bot');
   try {
     bot.onText(/\/\/*./, messageHandler);
   } catch (error) {
