@@ -36,15 +36,23 @@ export const AVAILABLE_COMMANDS_WHILE_STREAMING = [
 export const bot = new TelegramBot(TG_TOKEN, { polling: true });
 
 // TODO: Handle inputs without command
-export const messageHandler = async (
+export const commandHandler = async (
   msg: TelegramBot.Message,
   match: RegExpExecArray | null
 ) => {
-  const command = msg.text?.slice(1);
   const chatId = msg.chat.id;
+  if (msg.chat.type !== 'private') {
+    sendMessage(
+      chatId,
+      'This bot is only intended to work in private conversations. Please open a private chat with this bot!'
+    );
+    return;
+  }
+
   const sender = msg.chat.first_name
     ? `${msg.chat.first_name} ${msg.chat.last_name}`.trim()
     : msg.chat.username;
+  const command = msg.text?.slice(1);
 
   log.info(`Received a new command "${command}" from ${sender}`);
   switch (command) {
@@ -54,6 +62,7 @@ export const messageHandler = async (
         `Unknown command: ${command}.\nUse /help to get a list of available commands`
       );
       break;
+    case 'start':
     case 'help':
       sendMessage(
         chatId,

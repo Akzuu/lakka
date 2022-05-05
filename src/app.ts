@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import initServer from './components/api/server';
 import { log } from './lib/log';
-import { bot, messageHandler } from './components/bot/bot';
+import { bot, commandHandler } from './components/bot/bot';
 import knex from './components/database/knex';
 
 module.exports = (async () => {
@@ -28,7 +28,7 @@ module.exports = (async () => {
   // Start Telegram command listener
   log.info('Starting Telegram bot');
   try {
-    bot.onText(/\/\/*./, messageHandler);
+    bot.onText(/\/\/*./, commandHandler);
   } catch (error) {
     log.error('Error starting the command bot!', error);
     process.exit(1);
