@@ -1,3 +1,4 @@
+import { Knex } from 'knex';
 import snakecaseKeys from 'snakecase-keys';
 import knex from '../../knex';
 import {
@@ -7,23 +8,34 @@ import {
   StreamId,
 } from '../../types/database.types';
 
-export const createStreamQuery = async (payload: ICreateStreamQuery) => {
+export const createStreamQuery = async (
+  payload: ICreateStreamQuery,
+  trx?: Knex.Transaction
+) => {
   // SEC_PRO Using Knex, we can pass user inputs straight into the
   // query, because Knex handles sanitization and separation in the driver level
-  const result = await knex('stream').insert(snakecaseKeys(payload));
+  const db = trx ?? knex;
+
+  const result = await db('stream').insert(snakecaseKeys(payload));
 
   return result[0] as StreamId;
 };
 
 export const updateStreamQuery = async (
   streamId: StreamId,
-  payload: IUpdateStreamQuery
+  payload: IUpdateStreamQuery,
+  trx?: Knex.Transaction
 ) => {
-  await knex('stream').where({ id: streamId }).update(snakecaseKeys(payload));
+  const db = trx ?? knex;
+  await db('stream').where({ id: streamId }).update(snakecaseKeys(payload));
 };
 
-export const createPasscodeQuery = async (payload: ICreatePasscodeQuery) => {
-  const result = await knex('passcode').insert(snakecaseKeys(payload));
+export const createPasscodeQuery = async (
+  payload: ICreatePasscodeQuery,
+  trx?: Knex.Transaction
+) => {
+  const db = trx ?? knex;
+  const result = await db('passcode').insert(snakecaseKeys(payload));
 
   return result;
 };

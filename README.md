@@ -19,3 +19,8 @@ npm run dev
 - Possibility to manipulate the data seen on screen live
 - Add multiple users to same streaming session so that there can be multiple stream "editors"
 - Possibility to create a custom overlays instead of fixed ones
+
+## Possible features
+
+- Crawl kyykkaliiga.fi (and other leagues?) to automatically get all the available matches and let streamer pick streamed matches from there
+- Stream annoucement channel (Match X vs. Y starting at 18:00! Stream link: ...)

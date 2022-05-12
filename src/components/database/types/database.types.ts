@@ -28,9 +28,14 @@ export enum Role {
   Techinican = 'techinican',
 }
 export interface ICreateUserQuery {
-  telegramChatId: string;
-  streamId: string;
   description?: string;
   name?: string;
-  role?: Role;
+  streamId: StreamId;
+  role: Role;
+  telegramChatId: string | number;
+}
+
+export interface ICreateTeamQuery {
+  name?: string;
+  abbreviation?: string;
 }

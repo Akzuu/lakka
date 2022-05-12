@@ -6,6 +6,10 @@ import {
   createStreamQuery,
 } from '../../components/database/queries/stream/streamQueries';
 import { log } from '../log';
+import knex from '../../components/database/knex';
+import { createUserQuery } from '../../components/database/queries/user/userQueries';
+import { Role } from '../../components/database/types/database.types';
+import { createTeamsQuery } from '../../components/database/queries/team/teamQueries';
 
 const PASSCODE_VALID_FOR_MINUTES = 5;
 const QUESTION_ANSWER_TIMEOUT_SECONDS = 120;
@@ -24,6 +28,11 @@ const generatePasscode = () => {
 
   // await createPasscodeQuery({})
 };
+
+interface IStreamInfo {
+  teamOne: string;
+  teamTwo: string;
+}
 
 const answerListener = async (
   chatId: ChatId,
@@ -90,7 +99,7 @@ const streamInfoAsker = async (chatId: ChatId) =>
     try {
       const teamOne = await answerListener(chatId, 'First team name?');
       const teamTwo = await answerListener(chatId, 'Second team name?');
-      // FIX Removing reply listeners like this might fuck up the stream creation
+      // FIX_ME Removing reply listeners like this might fuck up the stream creation
       // process for other users trying to create a stream at the same time
       bot.clearReplyListeners();
 
@@ -99,7 +108,7 @@ const streamInfoAsker = async (chatId: ChatId) =>
         `Confirm teams: ${teamOne} - ${teamTwo}`
       );
 
-      // FIX see above comment
+      // FIX_ME see above comment
       bot.removeAllListeners('callback_query');
 
       if (confirm === 'confirm') {
@@ -120,31 +129,43 @@ const streamInfoAsker = async (chatId: ChatId) =>
 export const createStream = async (chatId: ChatId, sender?: string) => {
   let streamInfo;
   try {
-    streamInfo = await streamInfoAsker(chatId);
+    streamInfo = (await streamInfoAsker(chatId)) as IStreamInfo;
   } catch (error) {
     sendMessage(chatId, error as string);
     return;
   }
 
-  console.log('Kissa');
+  // Create transaction
+  let trx;
+  try {
+    trx = await knex.transaction();
+  } catch (error) {
+    log.error(error);
+    sendMessage(chatId, 'Unexpected error, please try again later!');
+    return;
+  }
 
-  // let streamId;
-  // const passcode = generatePasscode();
+  try {
+    const streamId = await createStreamQuery(
+      {
+        leagueId: 1,
+      },
+      trx
+    );
+    await createUserQuery(
+      {
+        streamId,
+        telegramChatId: chatId,
+        role: Role.Host,
+        name: sender ?? 'Juontaja X',
+      },
+      trx
+    );
+  } catch (error) {
+    log.error(error);
+    sendMessage(chatId, 'Unexpected error, please try again later!');
+    return;
+  }
 
-  // // TODO also create user in the same transaction
-  // try {
-  //   streamId = await createStreamQuery({
-  //     leagueId: 1, // TODO Create leagues
-  //   });
-  // } catch (error) {
-  //   log.error('Stream creation failed!', error);
-  //   return;
-  // }
-
-  // const dateNow = new Date().toISOString();
-
-  // sendMessage(
-  //   chatId,
-  //   `Stream created! Stream id is ${streamId} and the passcode is ${passcode}`
-  // );
+  sendMessage(chatId, `Stream created! Overlay URL: https://TODO.TODO/FIX_ME`);
 };
