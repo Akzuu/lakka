@@ -24,3 +24,7 @@ npm run dev
 
 - Crawl kyykkaliiga.fi (and other leagues?) to automatically get all the available matches and let streamer pick streamed matches from there
 - Stream annoucement channel (Match X vs. Y starting at 18:00! Stream link: ...)
+
+## GDPR
+
+At this moment this bot is not GDPR compliant.

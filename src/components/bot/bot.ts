@@ -3,6 +3,7 @@ process.env.NTBA_FIX_319 = '1';
 
 import TelegramBot from 'node-telegram-bot-api';
 import { createStream } from '../../lib/commands/create';
+import { registerUser } from '../../lib/commands/register';
 import { log } from '../../lib/log';
 
 const TG_TOKEN = process.env.TG_TOKEN;
@@ -10,6 +11,7 @@ if (!TG_TOKEN) throw new Error('Missing env variable TG_TOKEN!');
 
 export const AVAILABLE_COMMANDS = [
   ['help', 'Show this message'],
+  ['register', 'Register as an user'],
   ['create', 'Starts the stream creation process'],
   ['join', 'Join to existing stream as a techinican or co-host'],
 
@@ -80,6 +82,9 @@ export const commandHandler = async (
       break;
     case 'test':
       createStream(chatId, sender);
+      break;
+    case 'register':
+      registerUser(chatId);
   }
 };
 

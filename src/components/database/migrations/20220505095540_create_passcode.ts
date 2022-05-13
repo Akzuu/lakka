@@ -11,7 +11,7 @@ export async function up(knex: Knex): Promise<void> {
     table.dateTime('active_until').notNullable();
     table.integer('stream_id', 10).unsigned().notNullable();
     table.foreign('stream_id').references('id').inTable('stream');
-    table.timestamps();
+    table.timestamps(true, true);
   });
 }
 

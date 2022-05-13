@@ -5,7 +5,7 @@ export async function up(knex: Knex): Promise<void> {
     table.increments('id').primary();
     table.string('name', 255).notNullable();
     table.string('description', 512);
-    table.timestamps();
+    table.timestamps(true, true);
   });
 
   await knex.schema.createTable('stream', (table) => {
@@ -17,7 +17,7 @@ export async function up(knex: Knex): Promise<void> {
     table.dateTime('end_time');
     table.string('location', 255);
     table.boolean('ended');
-    table.timestamps();
+    table.timestamps(true, true);
   });
 
   await knex.schema.createTable('user', (table) => {
@@ -28,7 +28,7 @@ export async function up(knex: Knex): Promise<void> {
     table.integer('stream_id', 10).unsigned();
     table.foreign('stream_id').references('id').inTable('stream');
     table.primary(['stream_id', 'telegram_id']);
-    table.timestamps();
+    table.timestamps(true, true);
   });
 
   await knex.schema.createTable('team', (table) => {
@@ -36,7 +36,7 @@ export async function up(knex: Knex): Promise<void> {
     table.string('name', 255);
     table.string('abbreviation', 255);
     table.string('description', 512);
-    table.timestamps();
+    table.timestamps(true, true);
   });
 
   await knex.schema.createTable('player', (table) => {
@@ -45,7 +45,7 @@ export async function up(knex: Knex): Promise<void> {
     table.string('role', 255);
     table.integer('team_id', 10).unsigned();
     table.foreign('team_id').references('id').inTable('team');
-    table.timestamps();
+    table.timestamps(true, true);
   });
 }
 

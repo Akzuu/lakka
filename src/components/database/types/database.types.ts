@@ -1,10 +1,10 @@
-import TelegramBot from 'node-telegram-bot-api';
+import { ChatId } from 'node-telegram-bot-api';
 
 export interface ICreateStreamQuery {
-  leagueId: LeagueId;
-  startTime?: string;
   endTime?: string;
+  leagueId?: LeagueId;
   location?: string;
+  startTime?: string;
 }
 
 export interface IUpdateStreamQuery {
@@ -18,24 +18,38 @@ export type StreamId = number;
 export type LeagueId = number;
 
 export interface ICreatePasscodeQuery {
-  streamId: StreamId;
+  activeUntil: string;
   passcode: string;
+  streamId: StreamId;
 }
 
 export enum Role {
-  Host = 'host',
   'Co-Host' = 'co-host',
+  Host = 'host',
   Techinican = 'techinican',
 }
 export interface ICreateUserQuery {
   description?: string;
-  name?: string;
-  streamId: StreamId;
-  role: Role;
+  name: string;
   telegramChatId: string | number;
 }
 
 export interface ICreateTeamQuery {
-  name?: string;
   abbreviation?: string;
+  name?: string;
+}
+
+export type UserId = number;
+export interface ICreateUserLinkToStream {
+  streamId: StreamId;
+  userId: UserId;
+}
+
+export interface IUser {
+  createdAt: string;
+  description?: string;
+  id: number;
+  name: string;
+  telegramChatId: ChatId;
+  updatedAt: string;
 }
