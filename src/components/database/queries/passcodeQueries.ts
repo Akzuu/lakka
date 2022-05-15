@@ -54,6 +54,7 @@ export const insertFailedJoinAttempt = async (
   );
 };
 
+// TODO
 export const isUserBannedFromJoining = async (
   chatId: ChatId,
   trx?: Knex.Transaction

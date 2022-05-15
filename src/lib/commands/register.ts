@@ -8,6 +8,7 @@ interface IUserInfo {
   name: string;
 }
 
+// TODO Ask more information?
 const userInfoAsker = async (chatId: ChatId) =>
   new Promise(async (resolve, reject) => {
     try {

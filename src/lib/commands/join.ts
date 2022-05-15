@@ -12,6 +12,7 @@ import { log } from '../log';
 export const joinStream = async (chatId: ChatId) => {
   let userBannedFromJoining: boolean;
 
+  // Check cooldown status
   try {
     userBannedFromJoining = await isUserBannedFromJoining(chatId);
   } catch (error) {
@@ -46,6 +47,7 @@ export const joinStream = async (chatId: ChatId) => {
   }
 
   if (streamId === undefined) {
+    // SEC_PRO insert failed join attempt to the database
     try {
       await insertFailedJoinAttempt(chatId);
     } catch (error) {

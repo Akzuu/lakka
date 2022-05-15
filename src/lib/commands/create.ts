@@ -119,5 +119,6 @@ export const createStream = async (chatId: ChatId, sender?: string) => {
     return;
   }
 
+  // TODO link the actual overlay
   sendMessage(chatId, `Stream created! Overlay URL: https://TODO.TODO/TODO`);
 };

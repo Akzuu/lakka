@@ -8,10 +8,11 @@ import { log } from '../log';
 
 const PASSCODE_VALID_FOR_MINUTES = 10;
 
-// SEC_PRO: Passcodes are not really secure, but there is no need to have super
-// secure anways since they are only used for limited time.
-// Perhaps there should be some kind of system limiting the possibility to brute
-// force these anyway?
+// SEC_PRO: Six character long passcodes are not really secure, but they are
+// easy for the users. To make sure that the codes can not be brute forced
+// easily, the passcodes will only be valid for 10 minutes. If user tries
+// wrong passcode more than tree times, 10 minute cooldown is issued where user
+// is not able to try new passcodes
 const generatePasscode = async (streamId: StreamId) => {
   const passcode = customAlphabet('1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ', 6)();
 

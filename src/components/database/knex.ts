@@ -8,6 +8,7 @@ export enum Env {
 
 const ENV = (process.env.ENVIRONMENT as Env) ?? Env.development;
 
-// SEC_PRO Using Knex, we can pass user inputs straight into the
-// query, because Knex handles sanitization and separation in the driver level
+// SEC_PRO Knex is used to handle communication with the MySQL database.
+// It will handle input sanitization and when used correctly, should prevent
+// SQL injections.
 export default knex(config[ENV]);
