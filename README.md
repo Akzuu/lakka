@@ -21,7 +21,15 @@ npm run dev
 
 ## Secure Programming
 
-Relevant parts for the course are marked with `SEC_PRO` comment prefix.
+Relevant parts of the code for the course are marked with `SEC_PRO` comment prefix.
+
+### Identified security issues and some solutions
+
+| Problem                           | Solution                                                                                                                                                                                                                                     |
+| --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| User input and SQL injections​    | Queries are built with Knex which should be able to handle injections safely.                                                                                                                                                                |
+| Session passcode strength is weak | Users can only try inputting the passcode three times. After three failed attempts, 10 minute cooldown is issued to the user, which should limit the possibility to brute force the codes. The passcodes are also only valid for 10 minutes. |
+| Outdated packages​                | Use GitHub bot which identifies outdated packages and creates merge requests for updating the package.                                                                                                                                       |
 
 ## Planned features
 
