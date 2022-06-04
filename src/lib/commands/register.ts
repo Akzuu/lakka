@@ -9,7 +9,9 @@ interface IUserInfo {
 }
 
 // TODO Ask more information?
+// REFACTOR
 const userInfoAsker = async (chatId: ChatId) =>
+  // eslint-disable-next-line no-async-promise-executor
   new Promise(async (resolve, reject) => {
     try {
       // TODO GDPR!

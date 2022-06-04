@@ -20,6 +20,8 @@ interface IStreamInfo {
 }
 
 const streamInfoAsker = async (chatId: ChatId) =>
+  // TODO REFACTOR
+  // eslint-disable-next-line no-async-promise-executor
   new Promise(async (resolve, reject) => {
     try {
       const teamOne = await answerListener(chatId, 'First team name?');
@@ -51,9 +53,10 @@ const streamInfoAsker = async (chatId: ChatId) =>
     }
   });
 
-export const createStream = async (chatId: ChatId, sender?: string) => {
+export const createStream = async (chatId: ChatId) => {
   let streamInfo;
   try {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     streamInfo = (await streamInfoAsker(chatId)) as IStreamInfo;
   } catch (error) {
     sendMessage(chatId, error as string);

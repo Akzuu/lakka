@@ -4,6 +4,7 @@ import snakecaseKeys from 'snakecase-keys';
 import knex from '../knex';
 import { ICreatePasscodeQuery, StreamId } from '../types/database.types';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const MAX_FAILED_ATTEMPTS = 3;
 
 export const createPasscodeQuery = async (
@@ -55,9 +56,9 @@ export const insertFailedJoinAttempt = async (
 };
 
 // TODO
-export const isUserBannedFromJoining = async (
-  chatId: ChatId,
-  trx?: Knex.Transaction
-) => {
-  return false;
-};
+export const isUserBannedFromJoining = async () =>
+  //chatId: ChatId,
+  //trx?: Knex.Transaction
+  {
+    return false;
+  };

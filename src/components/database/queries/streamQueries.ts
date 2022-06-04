@@ -3,7 +3,6 @@ import { ChatId } from 'node-telegram-bot-api';
 import snakecaseKeys from 'snakecase-keys';
 import knex from '../knex';
 import {
-  ICreatePasscodeQuery,
   ICreateStreamQuery,
   ICreateUserLinkToStream,
   IUpdateStreamQuery,

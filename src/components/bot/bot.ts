@@ -38,10 +38,7 @@ export const AVAILABLE_COMMANDS_WHILE_STREAMING = [
 export const bot = new TelegramBot(TG_TOKEN, { polling: true });
 
 // TODO: Handle inputs without command
-export const commandHandler = async (
-  msg: TelegramBot.Message,
-  match: RegExpExecArray | null
-) => {
+export const commandHandler = async (msg: TelegramBot.Message) => {
   const chatId = msg.chat.id;
   if (msg.chat.type !== 'private') {
     sendMessage(
@@ -78,10 +75,7 @@ export const commandHandler = async (
       );
       break;
     case 'create':
-      sendMessage(chatId, 'Not available, yet');
-      break;
-    case 'test':
-      createStream(chatId, sender);
+      createStream(chatId);
       break;
     case 'register':
       registerUser(chatId);
